@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage[UTF8]{ctex}
+\usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+
+\author{zhuangh7}
+\title{Hello World}
+\begin{document}
+\maketitle
+% \tableofcontents
+\section{Introduction}
+Intel SGX技术提供了一系列的硬件特性，帮助保护应用免受操作系统、hypervisor、BIOS和其他软件的伤害。
+应用程序可以整个或者部分的放入到enclave中运行
+\section{威胁模型}
+Graphene-SGX 的威胁模型与典型的 SGX 应用的威胁模型类似。
+下列的组件是不被信任的：
+\begin{itemize}
+    \item [1)] 
+    除CPU之外的硬件。
+    \item [2)]
+    操作系统、hypervisor和其他的系统软件。
+    \item [3)]
+    在enclave之外跟其他enclave之内运行的应用程序。
+    \item [4)]
+    同一应用程序的enclave之外的部分。
+\end{itemize}   
+\paragraph{}
+Graphene-SGX只信任CPU，还有enclave内部的代码。
+还必须信任Intel的SGX SDK中的aesmd工具，该工具验证enclave签名中的属性并批准enclave的创建。
+这是现在利用SGX技术的所有工作都必须信任的。
+除此之外，Graphene-SGX还使用了Intel SGX的驱动程序，但是不信任他。
+Graphene-SGX不使用SDK中的其他部分。
+
+
+\section{保证的安全性质和能够防御的一些具体攻击}
+
+
+\subsection{保证的安全性质}
+
+
+\subsection{能防御的具体攻击}
+
+
+\section{性能、可扩展性（scalability）、灵活性等分析}
+\subsection{灵活性}
+由于Graphene-SGX可以直接在enclave上运行没有经过修改的Linux程序，因此，通过Graphene-SGX可以快速的
+帮助现有应用利用到SGX的enclave这一特性，提高已有应用的安全性，而同时不需要付出太大的开发成本。
+
+
+\subsection{性能分析}
+
+
+\subsection{scalability}
+
+
+\section{不足（至少包含两点）}
+\paragraph{无法防御一些攻击}
+Denial of service,sidechannels,controlled-channel attacks这些攻击是目前所有的 SGX 平台都难以防御的，Graphene-SGX同样无法处理。
+
+% \paragraph{Tian'anmen Square}is in the center of Beijing
+% \subparagraph{Chairman Mao} is in the center of Tian'anmen Square
+% \subsection{Hello Guangzhou}
+% \paragraph{Sun Yat-sen University} is the best university in Guangzhou.
+\end{document}
