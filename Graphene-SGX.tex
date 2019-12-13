@@ -1,15 +1,42 @@
 \documentclass{article}
 \usepackage[UTF8]{ctex}
 \usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
-
 \author{zhuangh7}
-\title{Hello World}
+\title{Graphene-SGX}
+\addbibresource{one.bib} 
 \begin{document}
 \maketitle
 % \tableofcontents
 \section{Introduction}
 Intel SGX技术提供了一系列的硬件特性，帮助保护应用免受操作系统、hypervisor、BIOS和其他软件的伤害。
-应用程序可以整个或者部分的放入到enclave中运行
+应用程序可以整个或者部分的放入到enclave中运行，而enclave会有如下功能
+\begin{itemize}
+    \item 对enclave内的虚拟地址空间的机密性和完整性进行保护。
+    \item 限制控制流进入enclave的入口。
+    \item 启动时检查内存的内容。
+    \item 远程证明。
+\end{itemize}
+
+正是因为提供了这些功能，因此用户就可以放心的将他们的敏感应用或者敏感数据放在云服务提供商的enclave中去运行，保证
+自己敏感应用的安全性，大大增加了云服务能够服务的对象。
+\paragraph{SGX的适配较为困难}为了保证SGX的安全性，在SGX中运行的应用将有一些限制。
+比如应用不能在enclave中调用syscall，而是通过一层shielding code去访问syscall，通过sheld层，syscall的结果
+在返回给应用之前会被验证，保证结果的安全可靠，防止host的操作系统攻击enclave中的应用。因此，普遍认为
+应用程序适配SGX需要付出大量的努力。
+前人的工作 Haven \cite{186173}展示了可以利用一个 library OS 把没有修改过的应用放到SGX中去。
+但是这需要付出性能上的 overhead 和TCB的扩大的代价。
+不过，Graphene-SGX验证了实际上利用library OS带来的overhead并没有前人所称的那么大，
+利用Graphene-SGX可以快速的把现有的应用放到enclave中去运行，并且没有很大的开销。
+
+\paragraph{Graphene-SGX并不是最优的}
+Graphene-SGX这一工作的目的并不是为了追求更好的SGX技术利用性能，
+而是为了把已有工作更快的部署到enclave中去。
+因此，虽然有很多方法可以提升enclave代码中的性能，
+降低代码的TCB，
+但是enclave都暂未采用，因为这些优化会令应用的适配更加复杂。
+
+
+
 \section{威胁模型}
 Graphene-SGX 的威胁模型与典型的 SGX 应用的威胁模型类似。
 下列的组件是不被信任的：
@@ -24,21 +51,35 @@ Graphene-SGX 的威胁模型与典型的 SGX 应用的威胁模型类似。
     同一应用程序的enclave之外的部分。
 \end{itemize}   
 \paragraph{}
-Graphene-SGX只信任CPU，还有enclave内部的代码。
+Graphene-SGX只信任CPU，还有enclave内部的代码（shielding module、bootloader）。
 还必须信任Intel的SGX SDK中的aesmd工具，该工具验证enclave签名中的属性并批准enclave的创建。
 这是现在利用SGX技术的所有工作都必须信任的。
-除此之外，Graphene-SGX还使用了Intel SGX的驱动程序，但是不信任他。
-Graphene-SGX不使用SDK中的其他部分。
-
+除此之外，虽然Graphene-SGX使用且仅使用了Intel SGX SDK 中的驱动程序，但是并不信任他。
 
 \section{保证的安全性质和能够防御的一些具体攻击}
-
-
 \subsection{保证的安全性质}
+\paragraph{继承自SGX的性质}
+Graphene-SGX 是对SGX技术的应用，因此，Intel SGX 技术提供的保护也被完全的继承。
+1)对enclave内的虚拟地址空间的机密性和完整性进行保护。
+2)限制控制流进入enclave的入口。
+3)启动时检查内存的内容。
+4)连接Intel服务器进行远程证明
 
+\paragraph{Graphene-SGX提供的特性}
+除此之外，Graphene-SGX还提供了很多其他安全性质。
+例如：
+\begin{itemize}
+    \item 通过本地验证证明两个本地enclave是安全的。
+    \item 在两个安全的本地enclave之间搭建安全通信。
+    \item 提供安全的fork机制创建一个新的enclave。
+\end{itemize}
 
-\subsection{能防御的具体攻击}
-
+\subsection{能够防御的具体攻击}
+\begin{itemize}
+    \item [1)]\textbf{来自host上其他进程的攻击} memory corruption,ROP attack
+    \item [2)]\textbf{自host OS 的攻击}rootkits
+    \item [3)]\textbf{来自硬件的攻击}cold-boot attacks
+\end{itemize}
 
 \section{性能、可扩展性（scalability）、灵活性等分析}
 \subsection{灵活性}
@@ -47,8 +88,8 @@ Graphene-SGX不使用SDK中的其他部分。
 
 
 \subsection{性能分析}
-
-
+\section{wow}wow
+eazy!
 \subsection{scalability}
 
 
@@ -60,4 +101,5 @@ Denial of service,sidechannels,controlled-channel attacks这些攻击是目前�
 % \subparagraph{Chairman Mao} is in the center of Tian'anmen Square
 % \subsection{Hello Guangzhou}
 % \paragraph{Sun Yat-sen University} is the best university in Guangzhou.
+\printbibliography
 \end{document}

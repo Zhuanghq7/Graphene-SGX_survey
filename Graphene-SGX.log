@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.12)  13 DEC 2019 09:41
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.12)  13 DEC 2019 14:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -748,18 +748,41 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 8.
  [1
 
-] [2] (./Graphene-SGX.aux)
+] [2]
+
+Package fontspec Warning: Font "FandolFang-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+
+Package fontspec Info: Font family 'FandolFang-Regular(0)' created for font
+(fontspec)             'FandolFang-Regular' with options
+(fontspec)             [Script={CJK},Extension={.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"[FandolFang-Regular.otf]/OT"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.53937> on input line 104.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 104.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 104.
+[3] [4] (./Graphene-SGX.aux)
 Package logreq Info: Writing requests to 'Graphene-SGX.run.xml'.
 \openout1 = `Graphene-SGX.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 23223 strings out of 492473
- 516164 string characters out of 6129311
- 806069 words of memory out of 5000000
- 27548 multiletter control sequences out of 15000+600000
- 535340 words of font info for 54 fonts, out of 8000000 for 9000
+ 23484 strings out of 492473
+ 523420 string characters out of 6129311
+ 807160 words of memory out of 5000000
+ 27797 multiletter control sequences out of 15000+600000
+ 536312 words of font info for 64 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 58i,6n,76p,817b,743s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 58i,6n,80p,834b,4761s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Graphene-SGX.pdf (2 pages).
+Output written on Graphene-SGX.pdf (4 pages).

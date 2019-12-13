@@ -85,6 +85,7 @@
       <file>Graphene-SGX-blx.bib</file>
     </requires>
     <requires type="editable">
+      <file>one.bib</file>
     </requires>
     <requires type="static">
       <file>biblatex.bst</file>
